@@ -43,3 +43,25 @@ Index ~~ login
 login -> view catalogue. with thumbnails
 catalogue -> movie page. like /video?v=vid_name_or_id, then API to get link and video db to get video link. is this possible??   
 catalogue -> filter catalogue by category
+
+## database structure:
+### film entries:
+ID, name, video file host, video file link, date added, category/ies?, thumbnail file link?, length (auto?)
+
+### user entries:
+ID?, username, history?, liked_videos? <- those probs need nosql
+
+### possible categories:
+just a list of categories - could be a simple array in a misc table.
+Other things in misc table could be 
+
+### operations:
+* get all films
+* get all films by category
+* get film's video link
+* add a film with details
+* add thumbnail
+* register user
+* get user pw hash for login
+* get/set user's seen videos
+* get/set user's liked videos
