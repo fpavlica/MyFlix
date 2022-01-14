@@ -33,9 +33,14 @@ Possible extra one of each for dev branch for nginx, flask, sql
     * done
 3. video server
     * try make it fetch the video link from the api
+    * done
 4. sql server for video metadata inc. filename?
+    * done
 5. actual myflix html app
-6. ???
+    * decide order login admin displays
+    * basic admin page form first, then individual movie page, then movies list, then login feature
+6. API identification codes and security check ups
+9. ???
 
 ## website structure:
 

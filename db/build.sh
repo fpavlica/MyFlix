@@ -7,4 +7,4 @@
 ## so build one manually
 
 # change port later
-docker run --name mymongo -p 80:8081 -d mongo:5
+docker run --name mongo -p 80:27017 -d mongo:5
