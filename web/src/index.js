@@ -1,5 +1,5 @@
-// const api_url = 'http://34.76.189.193/api'
-const api_url = 'http://10.132.0.8/api'
+let api_url = 'http://34.76.189.193/api'
+// const api_url = 'http://10.132.0.8/api'
 // const api_url = 'http://localhost:5000/api'
 
 async function get_movie_url (movie_name) {
