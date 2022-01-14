@@ -3,6 +3,8 @@ from flask import json, jsonify, request, Response
 import pymongo
 
 dbapi = Blueprint("dbaccess", __name__)
+mongourl = "mongodb://35.240.101.156:80"
+# mongourl = "mongodb://35.240.101.156:80"
 
 tempfilms = [
     {
@@ -50,7 +52,7 @@ def add_film():
     print(f'Request to add film: {data}')
     print(f'in json: {jsondata}')
 
-    mongoclient = pymongo.MongoClient("mongodb://35.240.101.156:80")
+    mongoclient = pymongo.MongoClient(mongourl)
     mydb = mongoclient["filmsdb"]
     filmscol = mydb["films"]
     x = filmscol.insert_one({"name": "film5", "v_fname":"film5.mp4"})
@@ -62,7 +64,7 @@ def add_film():
 
 @dbapi.route("/films_in_db_temp/")
 def films_in_db_temp():
-    mongoclient = pymongo.MongoClient("mongodb://35.240.101.156:80")
+    mongoclient = pymongo.MongoClient(mongourl)
     mydb = mongoclient["filmsdb"]
     filmscol = mydb["films"]
     found = list(filmscol.find())
