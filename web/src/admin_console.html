@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>MyFlix admin console</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style> <!-- to hide while loading -->
+</head>
+
+<body>
+    <div id="app">
+
+
+        <h1>MyFlix admin console</h1>
+        <h2>Add a film to database</h2>
+        <p>This film has to be already uploaded in cloud storage</p>
+
+        <label>Film name:</label>
+        <input v-model="filmname"><br>
+
+        <label>Video link:</label>
+        <input v-model="vlink"><br>
+        
+        <label>Credit text:</label>
+        <textarea v-model="vcredit"></textarea><br>
+
+        <button v-on:click="add_film">Submit</button>
+        <div v-cloak v-if="add_film_status != 'none'">
+            <div v-if="add_film_status == 'response_ok'">Request to add film sent successfully! </div>
+            <div v-if="add_film_status == 'response_not_ok'">Request to add film failed. Film was not added. </div>
+            <div v-if="add_film_status == 'network_error'">Request to add film failed. Network error. Film was not added. </div>
+            <button v-on:click="clear_add_film_confirmation">OK</button>
+        </div>
+
+    </div>
+
+    <!-- <hr> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> -->
+    <script src="https://unpkg.com/vue@3.2.26"></script>
+    <script src="admin_console.js"></script>
+
+</body>
+
+</html>
