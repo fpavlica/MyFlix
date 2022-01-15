@@ -39,15 +39,24 @@ Possible extra one of each for dev branch for nginx, flask, sql
 5. actual myflix html app
     * decide order login admin displays
     * basic admin page form first, then individual movie page, then movies list, then login feature
-6. API identification codes and security check ups
+6. fill some temp videos
+    * include a credits field in db
+    * thumbnails
+7. API identification codes (middleware) and security check ups
 9. ???
 
 ## website structure:
 
 Index ~~ login 
 login -> view catalogue. with thumbnails
-catalogue -> movie page. like /video?v=vid_name_or_id, then API to get link and video db to get video link. is this possible??   
+catalogue -> movie page. like /video?v=vid_name_or_id, then API to get link and video db to get video link. is this possible?? (also see embeds)   
 catalogue -> filter catalogue by category
+
+### in other words, pages:
+* user login
+* catalogue display with sort
+* video view
+* admin page [/] (also admin login? on separate server?)
 
 ## database structure:
 ### film entries:
@@ -64,9 +73,16 @@ Other things in misc table could be
 * get all films
 * get all films by category
 * get film's video link
-* add a film with details
+* add a film with details [/]
 * add thumbnail
 * register user
 * get user pw hash for login
 * get/set user's seen videos
 * get/set user's liked videos
+
+
+## misc
+* other  video link: https://storage.cloud.google.com/myflix-video-storage/video2.mp4
+* links to public domain videos: https://guides.library.harvard.edu/c.php?g=310751&p=2072820#s-lg-page-section-2072820
+* NPS public domain videos: https://www.nps.gov/grca/learn/photosmultimedia/b-roll_hd_index.htm
+* big buck bunny: https://download.blender.org/peach/bigbuckbunny_movies/

@@ -45,22 +45,37 @@ def get_film_link(film_name):
     # fname = film.v_fname
     return jsonify({"url": host+fname})
 
+
 @dbapi.route("/add_film", methods=['POST'])
 def add_film():
-    data = request.form
-    jsondata = request.json
-    print(f'Request to add film: {data}')
-    print(f'in json: {jsondata}')
+    # data = request.form
+    data = request.json
+
+    if (data is None):
+        return "no data was provided", 400
+    if ("filmname" not in data or
+        "vlink" not in data or 
+        "credit" not in data):
+        return "bad data", 400
+    if( data["filmname"] is None or data["filmname"] == "" or 
+        data["vlink"]    is None or data["vlink"]    == "" or 
+        data["credit"]   is None or data["credit"]   == ""):
+        return "empty data", 406
 
     mongoclient = pymongo.MongoClient(mongourl)
     mydb = mongoclient["filmsdb"]
-    filmscol = mydb["films"]
-    x = filmscol.insert_one({"name": "film5", "v_fname":"film5.mp4"})
-    print(x.inserted_id)
-    print(f'x is {x}')
+    filmscol = mydb["films"] # todo put these in a function later
 
-    return "", 200
-    # print(f'Request to add film. Name {data.name}, host {v_host}, fname {v_fname}')
+    # could also do a check if already exists and send 409
+    x = filmscol.insert_one({
+        "name": data["filmname"],
+        "vlink": data["vlink"],
+        "credit": data["credit"]
+    })
+    print(f'Inserted {data} with id {x.inserted_id}.')
+
+    # implicit 500 on write fail bc insert_one throws an exception on error
+    return "", 201
 
 @dbapi.route("/films_in_db_temp/")
 def films_in_db_temp():
