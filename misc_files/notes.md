@@ -86,3 +86,6 @@ Other things in misc table could be
 * links to public domain videos: https://guides.library.harvard.edu/c.php?g=310751&p=2072820#s-lg-page-section-2072820
 * NPS public domain videos: https://www.nps.gov/grca/learn/photosmultimedia/b-roll_hd_index.htm
 * big buck bunny: https://download.blender.org/peach/bigbuckbunny_movies/
+
+
+Put both catalogue and view film into one file as two components. maybe have one js file for each and then a short connecting one but only if time.

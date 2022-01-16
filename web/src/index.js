@@ -1,25 +1,17 @@
-let api_url = 'http://34.76.189.193/api'
-// const api_url = 'http://10.132.0.8/api'
-// const api_url = 'http://localhost:5000/api'
+const router = VueRouter.createRouter({
+    history: VueRouter.createWebHashHistory(),
+    routes:[
+        // {path: '/view_film/:id', component: {template: '<h3>temp {{$route.params.id}}</h3>'}},
+        {path: '/view_film/:id', component: viewFilmComponent},
+        // {path: '/view_film/', component: view_film_comp},
+        {path: '', component: catalogueComponent},
+        // {path: '/view_film', component: tempcomp},
+        // {path: '/view_film/', component: Vue.component('hello-world', {
+        //     template: '#hello-world-template'
+        //   })},
+    ],
+})
 
-async function get_movie_url (movie_name) {
-    let response = await(fetch(api_url + '/db/get_film_link/' + movie_name));
-    let data = await response.json();
-    return data;
-}
+const app = Vue.createApp( {
 
-async function change_video_url(movie_name) {
-    console.log("in func");
-    video = document.getElementById('video');
-    console.log("video is "+ video);
-
-
-    let vurlj = await get_movie_url(movie_name);
-    let vurl = vurlj.url;
-    source = document.createElement('source');
-    source.setAttribute("src", vurl);
-    source.setAttribute("type", "video/mp4");
-    video.appendChild(source);
-}
-console.log("in js file");
-window.onload = async () => { await change_video_url("movie1")};
+}).use(router).mount('#app')
