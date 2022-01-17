@@ -38,12 +38,17 @@ Possible extra one of each for dev branch for nginx, flask, sql
     * done
 5. actual myflix html app
     * decide order login admin displays
-    * basic admin page form first, then individual movie page, then movies list, then login feature
+    * basic admin page form first [/], then individual movie page [/], then movies list [/], then login feature [-]
 6. fill some temp videos
     * include a credits field in db
     * thumbnails
+    * category
 7. API identification codes (middleware) and security check ups
-9. ???
+8. Jenkins/git/gcloud dev and main branches 
+    * maybe some env type variables for each if that's easy
+9. security check up
+10. make it pretty with CSS
+11. ???
 
 ## website structure:
 
@@ -54,8 +59,8 @@ catalogue -> filter catalogue by category
 
 ### in other words, pages:
 * user login
-* catalogue display with sort
-* video view
+* catalogue display with sort [/] sort [-]
+* video view [/]
 * admin page [/] (also admin login? on separate server?)
 
 ## database structure:
@@ -70,11 +75,12 @@ just a list of categories - could be a simple array in a misc table.
 Other things in misc table could be 
 
 ### operations:
-* get all films
+* get all films [/]
 * get all films by category
-* get film's video link
+* get film's video link [/]
 * add a film with details [/]
 * add thumbnail
+* login user (send cookie token)
 * register user
 * get user pw hash for login
 * get/set user's seen videos

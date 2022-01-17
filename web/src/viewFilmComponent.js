@@ -2,7 +2,7 @@ const viewFilmComponent = {
     template: `
     <h1>{{film.name}}</h1>
     <video v-bind:src="film.vlink" controls=""></video>
-    <p> credit: {{ film.credit}} </p>
+    <p> {{ film.credit ? 'credit: ' + film.credit : '' }} </p>
     `,
     data() {
         return {
@@ -29,6 +29,7 @@ const viewFilmComponent = {
                 response.json().then((data) => {
                     console.log(data);
                     this.film = data;
+                    // this.film = {name: data.name, vlink: data.vlink}
                 })
             }).catch((error) => {
                 console.log("network error:");
