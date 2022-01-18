@@ -50,7 +50,7 @@ const loginComponent = {
 
                     }
                 }).catch((error) => {
-                    console.log("network error");
+                    this.register_status = "Network error."
                     console.error(error);
                 });
 
@@ -80,7 +80,7 @@ const loginComponent = {
                     this.register_status = "Registration failed.";
                 }
             }).catch((error) => {
-                console.log("network error:");
+                this.register_status = "network error:";
                 console.error(error);
             });
         }

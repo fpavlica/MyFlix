@@ -19,8 +19,8 @@ const catalogueComponent = {
     `,
     data() {
         return {
-            api_url: "http://localhost:5000/api",
-            // api_url: 'http://34.76.189.193/api',
+            // api_url: "http://localhost:5000/api",
+            api_url: 'http://34.76.189.193/api',
 
             category: "all",
             films: [],
