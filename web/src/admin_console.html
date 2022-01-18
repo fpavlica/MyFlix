@@ -9,7 +9,7 @@
         [v-cloak] {
             display: none;
         }
-    </style> <!-- to hide while loading -->
+    </style> <!-- to hide elements while loading -->
 </head>
 
 <body>
@@ -23,8 +23,14 @@
         <label>Film name:</label>
         <input v-model="filmname"><br>
 
+        <label>Categories separated by commas:</label>
+        <input v-model="categories"><br>
+
         <label>Video link:</label>
         <input v-model="vlink"><br>
+
+        <label>Thumbnail link:</label>
+        <input v-model="thumblink"><br>
         
         <label>Credit text:</label>
         <textarea v-model="vcredit"></textarea><br>
@@ -40,8 +46,6 @@
     </div>
 
     <!-- <hr> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> -->
     <script src="https://unpkg.com/vue@3.2.26"></script>
     <script src="admin_console.js"></script>
 

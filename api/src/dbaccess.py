@@ -63,23 +63,25 @@ def add_film():
 
     if (data is None):
         return "no data was provided", 400
-    if ("filmname" not in data or
-        "vlink" not in data or 
-        "credit" not in data):
-        return "bad data", 400
-    if( data["filmname"] is None or data["filmname"] == "" or 
-        data["vlink"]    is None or data["vlink"]    == "" or 
-        data["credit"]   is None or data["credit"]   == ""):
-        return "empty data", 406
+    exp_fields = ["filmname", "categories", "vlink", "thumblink", "credit"]
+    for ef in exp_fields:
+        if (ef not in data):
+            return "bad data", 400
+    if( data[ef] is None or data[ef] == ""):
+        return "missing or empty data", 406
 
     mongoclient = pymongo.MongoClient(mongourl)
     mydb = mongoclient["filmsdb"]
     filmscol = mydb["films"] # todo put these in a function later
 
+    # later check if thumblink is empty, send 202 accepted, then download file, ffmpeg to generate thumbnail, gcloud upload, and remove video and picture
+
     # could also do a check if already exists and send 409
     x = filmscol.insert_one({
         "name": data["filmname"],
+        "categories": data["categories"],
         "vlink": data["vlink"],
+        "thumblink": data["thumblink"],
         "credit": data["credit"]
     })
     print(f'Inserted {data} with id {x.inserted_id}.')

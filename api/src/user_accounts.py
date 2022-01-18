@@ -104,7 +104,7 @@ def login():
             salt = user["salt"], 
             expected = user["password"])):
             print(f"authorised user: {request.json['username']}")
-            return "", 200
+            return "authorised", 200
             pass
         else:
             # bad password, send a 401 Unauthorised

@@ -4,16 +4,16 @@ const catalogueComponent = {
 
     <ul v-cloak id="list_of_films">
         <li v-for="film in films">
-            {{ film.name }}
-            <br>
-            <router-link v-bind:to="'/view_film/' + film._id">view film link</router-link>
-            <br>
-            {{ film.vlink }}
-            <br>
-            {{ film.credit }}
-            <br>
-            <br> <!-- temp spacing-->
-            <br>
+        <div style="width:90%;height:300px;">
+            <img v-bind:src="film.thumblink" style="width:360px;height:240px;float:left;">
+            <div style="float:left;margin:20px;">
+                {{ film.name }}
+                <br>
+                <router-link v-bind:to="'/view_film/' + film._id">view film link</router-link>
+                <br>
+                {{ film.categories_readable }}
+            </div
+        </div>
         </li>
     </ul>
     `,
@@ -37,17 +37,16 @@ const catalogueComponent = {
             fetch(this.api_url + "/db/list_films/" + this.category)
             .then((response) => {
                 console.log(response);
-                // const data = await response.json();
-                console.log(response.status);
-                console.log(response.statusText);
                 response.json().then((data) => {
                     console.log(data);
+                    if(data.categories) {
+                        data.categories_readable = data.categories.join(", ")
+                    }
                     this.films = data;
                 })
             }).catch((error) => {
                 console.log("network error:");
                 console.error(error);
-                // this.add_film_status = "network_error";
             });
         }
     }

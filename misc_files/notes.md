@@ -46,6 +46,7 @@ Possible extra one of each for dev branch for nginx, flask, sql
 7. API identification codes (middleware) and security check ups
 8. Jenkins/git/gcloud dev and main branches 
     * maybe some env type variables for each if that's easy
+    * ^ env won't work, possibly a cookie to switch bw localhost/dev/main
 9. security check up
 10. make it pretty with CSS
 11. ???
