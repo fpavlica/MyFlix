@@ -37,7 +37,7 @@ Possible extra one of each for dev branch for nginx, flask, sql
 4. sql server for video metadata inc. filename?
     * done
 5. actual myflix html app
-    * decide order login admin displays
+    * decide order of login admin displays
     * basic admin page form first [/], then individual movie page [/], then movies list [/], then login feature [-]
 6. fill some temp videos
     * include a credits field in db
@@ -49,6 +49,16 @@ Possible extra one of each for dev branch for nginx, flask, sql
 9. security check up
 10. make it pretty with CSS
 11. ???
+
+
+### new order:
+0. log in redirects and catch db empty errors
+    * done
+1. flask-login authentication if it's easy
+    * maybe do this later
+2. thumbnails and category
+3. jenkins server creates. But how kill server? maybe not. maybe just jenkins dev/main servers
+4. change ports to right ones (mongo server) and open firewall
 
 ## website structure:
 

@@ -12,12 +12,12 @@ from cryptography.exceptions import InvalidKey
 uaapi = Blueprint("user_access", __name__)
 mongourl = "mongodb://35.240.101.156:80"
 
+
+# some helper functions for password checks
 def asBytesIfHexString(s):
     return bytes.fromhex(s) if type(s) is str else s
-    # return s.encode('ascii') if type(s) is str else s
 def asHexStringIfBytes(b):
     return b.hex() if type(b) is bytes else b
-    # return b.decode('ascii') if type(b) is bytes else b
     
 def pwToBytes(pw):
     return pw.encode('ascii')
@@ -40,10 +40,6 @@ def getPwHash(pw):
     return key, salt
 
 def verifyPw(pw, salt, expected):
-    # print(f'in verifyPw salt is {salt}')
-    # print(f'verifying:')
-    # print(f'ex: {expected}')
-    # print(f'dr: {getKDF(asBytesIfHexString(salt)).derive()}')
     pw = pwToBytes(pw)
     salt = asBytesIfHexString(salt)
     expected = asBytesIfHexString(expected)
@@ -58,8 +54,7 @@ def verifyPw(pw, salt, expected):
 
 @uaapi.route("/register", methods=["POST"])
 def register():
-    print("an attemp was made at registering an account:")
-    print(request.json)
+    print(f"register attempt: {request.json}")
 
     mongoclient = pymongo.MongoClient(mongourl)
     mydb = mongoclient["usersdb"]
@@ -67,16 +62,18 @@ def register():
 
     # ensure user isn't already registered
     # probably would've been better to use find_one
-    num_existing_u = userscol.count_documents({"username":request.json["username"]})
-    if (num_existing_u > 0):
-        return "user already exists", 409
+    try:
+        num_existing_u = userscol.count_documents({"username":request.json["username"]})
+        if (num_existing_u > 0):
+            return "user already exists", 409
+    except KeyError as ke:
+        print(f"KeyError in register: {ke}")
+        pass
     
     # generate password crypto hash of password
     # (in this case the "password" is the hash of the original password)
     pwh, salt = getPwHash(request.json["password"])
 
-    print(f"some checks in register:\n {pwh}\n {asHexStringIfBytes(pwh)}")
-    print(f"salt in register is {salt}, \n {asHexStringIfBytes(salt)}")
     x = userscol.insert_one({
         "username": request.json["username"],
         "password": asHexStringIfBytes(pwh),
@@ -87,31 +84,34 @@ def register():
 
 @uaapi.route("/login", methods=["POST"])
 def login():
-    print("login attempt:")
-    print(request.json)
+    print(f"login attempt: {request.json}")
 
     mongoclient = pymongo.MongoClient(mongourl)
     mydb = mongoclient["usersdb"]
     userscol = mydb["users"]
 
-    users = userscol.find({"username":request.json["username"]})
-    users = list(users)
-    if (len(users) == 0):
-        return "no such user", 404
+    try:
+        users = userscol.find({"username":request.json["username"]})
+        users = list(users)
+        if (len(users) == 0):
+            return "no such user", 404
 
-    user = list(users)[0]
+        user = list(users)[0]
 
-    # if verified legit, send an auth token
-    if (verifyPw(
-        pw = request.json["password"], 
-        salt = user["salt"], 
-        expected = user["password"])):
-        print(f"authorised user: {request.json['username']}")
-        return "", 200
-        pass
-    else:
-        # bad password, send a 401 Unauthorised
-        abort(401)  
+        # if verified legit, send an auth token
+        if (verifyPw(
+            pw = request.json["password"], 
+            salt = user["salt"], 
+            expected = user["password"])):
+            print(f"authorised user: {request.json['username']}")
+            return "", 200
+            pass
+        else:
+            # bad password, send a 401 Unauthorised
+            abort(401)  
+    except KeyError as ke:
+        print(f"KeyError in login, {ke}")
+        return "user not found", 404
     
 
     pass
