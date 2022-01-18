@@ -1,10 +1,10 @@
+from bson.objectid import ObjectId
 from flask.blueprints import Blueprint
 from flask import json, jsonify, request, Response
 import pymongo
 
 dbapi = Blueprint("dbaccess", __name__)
 mongourl = "mongodb://35.240.101.156:80"
-# mongourl = "mongodb://35.240.101.156:80"
 
 tempfilms = [
     {
@@ -22,7 +22,7 @@ tempfilms = [
 
 @dbapi.route("/")
 def dbtest():
-    return "no api here"
+    return "no api here", 400
 
 
 @dbapi.route("/films")
@@ -45,6 +45,16 @@ def get_film_link(film_name):
     # fname = film.v_fname
     return jsonify({"url": host+fname})
 
+
+@dbapi.route("/get_film_by_id/<id>")
+def get_film_by_id(id):
+    mongoclient = pymongo.MongoClient(mongourl)
+    mydb = mongoclient["filmsdb"]
+    filmscol = mydb["films"]
+    film = list(filmscol.find({"_id": ObjectId(id)}))
+    film[0]["_id"] = str(film[0]["_id"])
+    # todo handle bad request (film not present)
+    return jsonify(film[0]), 200
 
 @dbapi.route("/add_film", methods=['POST'])
 def add_film():
@@ -77,6 +87,21 @@ def add_film():
     # implicit 500 on write fail bc insert_one throws an exception on error
     return "", 201
 
+@dbapi.route("/list_films/<category>")
+def list_films(category = "all"):
+    mongoclient = pymongo.MongoClient(mongourl)
+    mydb = mongoclient["filmsdb"]
+    filmscol = mydb["films"]
+    found = list(filmscol.find())
+
+    # from bson import json_util
+    for x in found:
+        print(f"found: {x}")
+        x["_id"] = str(x["_id"])
+    return jsonify(found), 200
+    # return Response(json_util.dumps({"temp":found}), mimetype = 'application/json')
+
+
 @dbapi.route("/films_in_db_temp/")
 def films_in_db_temp():
     mongoclient = pymongo.MongoClient(mongourl)
@@ -88,5 +113,5 @@ def films_in_db_temp():
     for x in found:
         print(f"found: {x}")
         x.pop("_id")
-    return jsonify(found)
+    return jsonify(found), 200
     # return Response(json_util.dumps({"temp":found}), mimetype = 'application/json')

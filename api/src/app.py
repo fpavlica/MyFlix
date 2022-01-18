@@ -9,6 +9,9 @@ api = Blueprint('api', 'api')
 from dbaccess import dbapi
 api.register_blueprint(dbapi, url_prefix='/db')
 
+from user_accounts import uaapi
+api.register_blueprint(uaapi, url_prefix='/accounts')
+
 app.register_blueprint(api, url_prefix='/api')
 
 
