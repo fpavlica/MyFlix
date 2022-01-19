@@ -1,5 +1,6 @@
 const viewFilmComponent = {
     template: `
+    <router-link to="/catalogue">Back to catalogue</router-link>
     <h1>{{film.name}}</h1>
     <video v-bind:src="film.vlink" controls=""></video>
     <p> {{ film.credit ? 'credit: ' + film.credit : '' }} </p>

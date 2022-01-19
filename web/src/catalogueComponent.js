@@ -5,13 +5,16 @@ const catalogueComponent = {
     <ul v-cloak id="list_of_films">
         <li v-for="film in films">
         <div style="width:90%;height:300px;">
-            <img v-bind:src="film.thumblink" style="width:360px;height:240px;float:left;">
+            <router-link v-bind:to="'/view_film/' + film._id">
+                <img v-bind:src="film.thumblink" style="width:360px;height:240px;float:left;">
+            </router-link>
             <div style="float:left;margin:20px;">
-                {{ film.name }}
+                <router-link v-bind:to="'/view_film/' + film._id">
+                    <h2> {{ film.name }}</h2>
+                    view film link
+                </router-link>
                 <br>
-                <router-link v-bind:to="'/view_film/' + film._id">view film link</router-link>
-                <br>
-                {{ film.categories_readable }}
+                Category: {{ film.categories_readable }}
             </div
         </div>
         </li>
@@ -39,9 +42,11 @@ const catalogueComponent = {
                 console.log(response);
                 response.json().then((data) => {
                     console.log(data);
-                    if(data.categories) {
-                        data.categories_readable = data.categories.join(", ")
-                    }
+                    data.forEach(e => {
+                        if(e.categories) {
+                            e.categories_readable = e.categories.join(", ")
+                        }
+                    });
                     this.films = data;
                 })
             }).catch((error) => {
