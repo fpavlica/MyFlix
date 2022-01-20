@@ -58,7 +58,9 @@ Possible extra one of each for dev branch for nginx, flask, sql
 1. flask-login authentication if it's easy
     * maybe do this later
 2. thumbnails and category
+    * filter by category. maybe later, after server and jenkins reorganisation
 3. jenkins server creates. But how kill server? maybe not. maybe just jenkins dev/main servers
+    *best do this tomorrow, need sleep and will have time
 4. change ports to right ones (mongo server) and open firewall
 
 ## website structure:

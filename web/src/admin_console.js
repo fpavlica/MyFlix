@@ -1,7 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
-            api_url: "http://localhost:5000/api",
+            // api_url: "http://localhost:5000/api",
             // api_url: 'http://34.76.189.193/api',
 
             filmname: "",
@@ -19,7 +19,7 @@ const app = Vue.createApp({
             categories = this.categories.split(',').map(x=>x.trim());
             
 
-            fetch(this.api_url + "/db/add_film", {
+            fetch(api_url + "/db/add_film", {
                 method: "POST",
                 headers: {"Content-Type":"application/json"},
                 body: JSON.stringify({

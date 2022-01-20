@@ -15,7 +15,7 @@ const loginComponent = {
     `,
     data() {
         return {
-            api_url: "http://localhost:5000/api",
+            // api_url: "http://localhost:5000/api",
             // api_url: 'http://34.76.189.193/api',
 
             film: {},
@@ -33,7 +33,7 @@ const loginComponent = {
             console.log("trying to log in")
             pwhash = CryptoJS.SHA256("password").toString()
 
-            fetch(this.api_url + "/accounts/login", {
+            fetch(api_url + "/accounts/login", {
                 method: "POST",
                 headers: {"Content-Type":"application/json"},
                 body: JSON.stringify({
@@ -62,7 +62,7 @@ const loginComponent = {
             //but it kinda helps prevent someone just reading the plaintext password with a bot
             pwhash = CryptoJS.SHA256("password").toString()
 
-            fetch(this.api_url + "/accounts/register", {
+            fetch(api_url + "/accounts/register", {
                 method: "POST",
                 headers: {"Content-Type":"application/json"},
                 body: JSON.stringify({

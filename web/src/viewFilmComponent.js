@@ -8,7 +8,7 @@ const viewFilmComponent = {
     data() {
         return {
             // api_url: "http://localhost:5000/api",
-            api_url: 'http://34.76.189.193/api',
+            // api_url: 'http://34.76.189.193/api',
 
             film: {},
         }
@@ -21,7 +21,7 @@ const viewFilmComponent = {
         fetchFilmInfo() {
             console.log("in ffi");
 
-            fetch(this.api_url + "/db/get_film_by_id/" + this.$route.params.id)
+            fetch(api_url + "/db/get_film_by_id/" + this.$route.params.id)
             .then((response) => {
                 console.log(response);
                 // const data = await response.json();
