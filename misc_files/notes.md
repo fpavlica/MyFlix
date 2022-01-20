@@ -24,6 +24,15 @@ A server for both main and test?
 
 Possible extra one of each for dev branch for nginx, flask, sql
 
+### new server org:
+* nginx for user-facing
+* flask for user-facing
+* nginx for admin 
+* flask for admin
+* mongodb
+
+* dev/main versions for all of the above
+
 ## order of work:
 
 1. jenkins set up to deploy hello_world from /web onto its server

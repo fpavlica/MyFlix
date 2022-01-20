@@ -23,7 +23,7 @@ const catalogueComponent = {
     data() {
         return {
             // api_url: "http://localhost:5000/api",
-            api_url: 'http://34.76.189.193/api',
+            // api_url: 'http://34.76.189.193/api',
 
             category: "all",
             films: [],
@@ -37,7 +37,7 @@ const catalogueComponent = {
         fetchFilms() {
             console.log("in ff");
 
-            fetch(this.api_url + "/db/list_films/" + this.category)
+            fetch(api_url + "/db/list_films/" + this.category)
             .then((response) => {
                 console.log(response);
                 response.json().then((data) => {
