@@ -10,7 +10,7 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.exceptions import InvalidKey
 
 uaapi = Blueprint("user_access", __name__)
-mongourl = "mongodb://35.240.101.156:80"
+from env import mongourl
 
 
 # some helper functions for password checks
@@ -104,7 +104,7 @@ def login():
             salt = user["salt"], 
             expected = user["password"])):
             print(f"authorised user: {request.json['username']}")
-            return "", 200
+            return "authorised", 200
             pass
         else:
             # bad password, send a 401 Unauthorised

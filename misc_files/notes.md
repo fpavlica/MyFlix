@@ -24,6 +24,15 @@ A server for both main and test?
 
 Possible extra one of each for dev branch for nginx, flask, sql
 
+### new server org:
+* nginx 
+* flask 
+* mongodb
+
+* dev/main versions for all of the above
+
+Possibly separate user-facing and admin-facing nginx and flask into separate servers
+
 ## order of work:
 
 1. jenkins set up to deploy hello_world from /web onto its server
@@ -46,6 +55,7 @@ Possible extra one of each for dev branch for nginx, flask, sql
 7. API identification codes (middleware) and security check ups
 8. Jenkins/git/gcloud dev and main branches 
     * maybe some env type variables for each if that's easy
+    * ^ env won't work, possibly a cookie to switch bw localhost/dev/main
 9. security check up
 10. make it pretty with CSS
 11. ???
@@ -57,7 +67,9 @@ Possible extra one of each for dev branch for nginx, flask, sql
 1. flask-login authentication if it's easy
     * maybe do this later
 2. thumbnails and category
+    * filter by category. maybe later, after server and jenkins reorganisation
 3. jenkins server creates. But how kill server? maybe not. maybe just jenkins dev/main servers
+    *best do this tomorrow, need sleep and will have time
 4. change ports to right ones (mongo server) and open firewall
 
 ## website structure:

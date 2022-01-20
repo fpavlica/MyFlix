@@ -4,23 +4,26 @@ const catalogueComponent = {
 
     <ul v-cloak id="list_of_films">
         <li v-for="film in films">
-            {{ film.name }}
-            <br>
-            <router-link v-bind:to="'/view_film/' + film._id">view film link</router-link>
-            <br>
-            {{ film.vlink }}
-            <br>
-            {{ film.credit }}
-            <br>
-            <br> <!-- temp spacing-->
-            <br>
+        <div style="width:90%;height:300px;">
+            <router-link v-bind:to="'/view_film/' + film._id">
+                <img v-bind:src="film.thumblink" style="width:360px;height:240px;float:left;">
+            </router-link>
+            <div style="float:left;margin:20px;">
+                <router-link v-bind:to="'/view_film/' + film._id">
+                    <h2> {{ film.name }}</h2>
+                    view film link
+                </router-link>
+                <br>
+                Category: {{ film.categories_readable }}
+            </div
+        </div>
         </li>
     </ul>
     `,
     data() {
         return {
             // api_url: "http://localhost:5000/api",
-            api_url: 'http://34.76.189.193/api',
+            // api_url: 'http://34.76.189.193/api',
 
             category: "all",
             films: [],
@@ -34,20 +37,21 @@ const catalogueComponent = {
         fetchFilms() {
             console.log("in ff");
 
-            fetch(this.api_url + "/db/list_films/" + this.category)
+            fetch(api_url + "/db/list_films/" + this.category)
             .then((response) => {
                 console.log(response);
-                // const data = await response.json();
-                console.log(response.status);
-                console.log(response.statusText);
                 response.json().then((data) => {
                     console.log(data);
+                    data.forEach(e => {
+                        if(e.categories) {
+                            e.categories_readable = e.categories.join(", ")
+                        }
+                    });
                     this.films = data;
                 })
             }).catch((error) => {
                 console.log("network error:");
                 console.error(error);
-                // this.add_film_status = "network_error";
             });
         }
     }
