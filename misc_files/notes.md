@@ -25,13 +25,13 @@ A server for both main and test?
 Possible extra one of each for dev branch for nginx, flask, sql
 
 ### new server org:
-* nginx for user-facing
-* flask for user-facing
-* nginx for admin 
-* flask for admin
+* nginx 
+* flask 
 * mongodb
 
 * dev/main versions for all of the above
+
+Possibly separate user-facing and admin-facing nginx and flask into separate servers
 
 ## order of work:
 
