@@ -71,6 +71,18 @@ Possibly separate user-facing and admin-facing nginx and flask into separate ser
 3. jenkins server creates. But how kill server? maybe not. maybe just jenkins dev/main servers
     *best do this tomorrow, need sleep and will have time
 4. change ports to right ones (mongo server) and open firewall
+    * done
+
+### things I can do:
+* (done) filter by category
+* fill database with films
+* extract full database fill script into some sort of backup
+* separate user-facing and admin-facing servers
+    * make pip run non-root otherwise problems (or other causes??)
+* folder structure and cleanup (with above)
+* add login tokens
+* choose some pretty CSS
+ 
 
 ## website structure:
 
