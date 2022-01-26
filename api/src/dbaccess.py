@@ -73,3 +73,14 @@ def list_films(category = "all"):
         x["_id"] = str(x["_id"])
     return jsonify(found), 200
     # return Response(json_util.dumps({"temp":found}), mimetype = 'application/json')
+
+
+@dbapi.route("/list_categories")
+def list_categories():
+    mongoclient = pymongo.MongoClient(mongourl)
+    mydb = mongoclient["filmsdb"]
+    filmscol = mydb["films"]
+
+    cats = filmscol.distinct("categories")
+    
+    return jsonify(cats), 200
