@@ -35,6 +35,9 @@ def add_film():
     if( data[ef] is None or data[ef] == ""):
         return "missing or empty data", 406
 
+    #turn categories into lowercase
+    categories = [x.lower() for x in data["categories"]]
+
     mongoclient = pymongo.MongoClient(mongourl)
     mydb = mongoclient["filmsdb"]
     filmscol = mydb["films"] # todo put these in a function later
@@ -59,7 +62,10 @@ def list_films(category = "all"):
     mongoclient = pymongo.MongoClient(mongourl)
     mydb = mongoclient["filmsdb"]
     filmscol = mydb["films"]
-    found = list(filmscol.find())
+    if category == "all":
+        found = list(filmscol.find())
+    else:
+        found = list(filmscol.find({"categories": category}))
 
     # from bson import json_util
     for x in found:
@@ -67,3 +73,14 @@ def list_films(category = "all"):
         x["_id"] = str(x["_id"])
     return jsonify(found), 200
     # return Response(json_util.dumps({"temp":found}), mimetype = 'application/json')
+
+
+@dbapi.route("/list_categories")
+def list_categories():
+    mongoclient = pymongo.MongoClient(mongourl)
+    mydb = mongoclient["filmsdb"]
+    filmscol = mydb["films"]
+
+    cats = filmscol.distinct("categories")
+    
+    return jsonify(cats), 200

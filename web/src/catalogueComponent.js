@@ -2,6 +2,15 @@ const catalogueComponent = {
     template: `
     <h1>MyFlix catalogue</h1>
 
+    <div v-cloak id="category-select">
+        Category:
+        <select v-model="category" v-on:change="catSelectChange();" style="display:inline;">
+            <option v-for="category in categories_list">
+                {{ category }}
+            </option>
+        </select>
+    </div>
+
     <ul v-cloak id="list_of_films">
         <li v-for="film in films">
         <div style="width:90%;height:300px;">
@@ -15,22 +24,21 @@ const catalogueComponent = {
                 </router-link>
                 <br>
                 Category: {{ film.categories_readable }}
-            </div
+            </div>
         </div>
         </li>
     </ul>
     `,
     data() {
         return {
-            // api_url: "http://localhost:5000/api",
-            // api_url: 'http://34.76.189.193/api',
-
             category: "all",
             films: [],
+            categories_list: ["all"],
         }
     },
     created() {
         console.log("created catalogueComponent");
+        this.fetchCategoriesList();
         this.fetchFilms();
     },
     methods: {
@@ -53,6 +61,26 @@ const catalogueComponent = {
                 console.log("network error:");
                 console.error(error);
             });
+        },
+
+        fetchCategoriesList() {
+            console.log("in fcl");
+
+            fetch(api_url + "/db/list_categories")
+            .then((response) => {
+                console.log(response);
+                response.json().then((data) => {
+                    console.log(data);
+                    this.categories_list = ["all"].concat(data);
+                })
+            }).catch((error) => {
+                console.log("network error:");
+                console.error(error);
+            });
+        },
+
+        catSelectChange() {
+            this.fetchFilms();
         }
     }
 };
