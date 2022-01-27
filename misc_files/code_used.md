@@ -32,9 +32,12 @@ database export and import:
     mongoexport --host="35.195.52.146:27017" --forceTableScan --db=filmsdb --collection=films --out=films.json
     mongoexport --host="35.195.52.146:27017" --forceTableScan --db=usersdb --collection=users --out=users.json
 
-    # to import. may need to drop first
-    mongoimport --host="35.195.52.146:27017" --db=filmsdb --collection=films films.json
-    mongoimport --host="35.195.52.146:27017" --db=usersdb --collection=users users.json
+    # to import. optionally --drop.
+    mongoimport --host="35.195.52.146:27017" --db=filmsdb --collection=films --file=films.json
+    mongoimport --host="35.195.52.146:27017" --db=usersdb --collection=users --file=users.json
+
+some film hosting links:
+    https://gist.github.com/jsturgis/3b19447b304616f18657
 
 gcloud create dev-frontend server:
     gcloud compute instances create myflix-dev-frontend --project=triple-rookery-294811 --zone=europe-west1-b --machine-type=f1-micro --network-interface=network-tier=PREMIUM,subnet=default --metadata=ssh-keys=frpavlica:ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAACAQCjVfr10LRgpCaUo6R1pyn6ogaTAjOSxmCPYfmN\+nEQtAO1XTmNGWrucFQALPwFVZlFuUipVQiTc870s\+OQIKSV\+Ye57Wii2xac/zkhJoq9Bi3b124OZWoeD5ft3vg1t5j/uRBt3Bh6\+uVAgorlRDZ6dqOPqj/nSJYyH3iXNzn7tSvh4f6/a1KNM8NPT9VDdTmL6dhdTQOKfjwUTUpMShITh5VMs5/7nnjrIemjYAO609vUkNIPVbbls1OXXDBoWeDirpC6/QMndLyoKfhR4fDF0qSZ2tuNnzH07hfNnVzXmmllRf3ceDfezzn5qQBVLV4tIgu6iZKDw/wzcvtnVfICC7eA\+gXLj0sRI8GYNVYfOGtQXN0uA5z9knb6EhLI4Dy95JNeS4C3hT6F41ieMDLoeewzog3/VYMGZgl0WOP3RlZMqFul2asz\+ettWqUAz45RfvLiup5787\+rJmIVNXU2tj9KjidDmb0DeP0RNgMQUgD/Xiqyp0OeUjHE0wS6xwKDWM4nvF3C8DMzynXiUOAgNYEI5i6k/uvcP9THy\+n2fbZpHZrljGw0ORi7K1s6VXKR4LbQkT9GlOV1a5vpeXoZV8Pkh1ODCHoEUQQJ7ofTEXld3SfKrjb5QMNsCWFQDp0cvlf38AnqhKMBiR6vVEUNFkhGdby09vhysQcM/Ps3WQ==\ frpavlica@jenkins-1 --maintenance-policy=MIGRATE --service-account=755721276176-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=http-server --create-disk=auto-delete=yes,boot=yes,device-name=myflix-dev-frontend,image=projects/cos-cloud/global/images/cos-81-12871-1317-8,mode=rw,size=10,type=projects/triple-rookery-294811/zones/europe-west1-b/diskTypes/pd-balanced --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
