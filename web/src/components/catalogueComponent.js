@@ -20,7 +20,7 @@ const catalogueComponent = {
             <div style="float:left;margin:20px;">
                 <router-link v-bind:to="'/view_film/' + film._id">
                     <h2> {{ film.name }}</h2>
-                    view film link
+                    view film
                 </router-link>
                 <br>
                 Category: {{ film.categories_readable }}
