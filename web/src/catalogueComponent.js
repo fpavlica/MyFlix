@@ -3,6 +3,7 @@ const catalogueComponent = {
     <h1>MyFlix catalogue</h1>
 
     <div v-cloak id="category-select">
+        Category:
         <select v-model="category" v-on:change="catSelectChange();" style="display:inline;">
             <option v-for="category in categories_list">
                 {{ category }}

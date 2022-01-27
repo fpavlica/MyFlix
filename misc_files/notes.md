@@ -76,12 +76,12 @@ Possibly separate user-facing and admin-facing nginx and flask into separate ser
 ### things I can do:
 * (done) filter by category
 * fill database with films
-* extract full database fill script into some sort of backup
+* (done) extract full database fill script into some sort of backup
 * separate user-facing and admin-facing servers
-    * make pip run non-root otherwise problems (or other causes??)
+    * maybe make pip run non-root otherwise problems (or other causes??)
 * folder structure and cleanup (with above)
 * add login tokens
-* choose some pretty CSS
+* (done-ish) choose some pretty CSS
  
 
 ## website structure:
